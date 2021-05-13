@@ -7,7 +7,7 @@ Creation Date: May, 11th 2021
 Bikeshare Github Project
 
 ### Description
-Describe what your project is about and what it does
+This project demonstrates what I have learnt in Github including repositories, documentation, refactoring and branching.
 
 ### Files used
 Include the files used
