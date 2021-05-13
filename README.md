@@ -10,7 +10,7 @@ Bikeshare Github Project
 This project demonstrates what I have learnt in Github including repositories, documentation, refactoring and branching.
 
 ### Files used
-Include the files used
+These files were used: bikeshare_project.py, chicago.csv, new_york_city.csv, washington.csv
 
 ### Credits
 It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
