@@ -15,14 +15,14 @@ def get_filters():
     Asks user to specify a city, month, and day to analyze.
 
     Returns:
-        (str) city - name of the city to analyze
-        (str) month - name of the month to filter by, or "all" to apply no month filter
-        (str) day - name of the day of week to filter by, or "all" to apply no day filter
+        (str) city - city to analyze
+        (str) month - month to filter including "all"
+        (str) day - day to filter including "all"
         """
-    print('Hello! Let\'s explore some US bikeshare data!\n')
-    
+    print('Hello! Welcome to your interactive bikeshare experience!\n')
+
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    
+
     city = input('For what city would you like to see the data? Chicago, New York or Washington:\n').lower()
     while True:
         if city not in cities:
@@ -31,18 +31,18 @@ def get_filters():
         else:
             break
     print('Cool, you picked the following city:\n' + city.title())
-    
+
     # TO DO: get user input for month (all, january, february, ... , june)
-    
+
     month = input('For what month would you like to see the data? You can choose either from a month from January to June or all.\n').lower()
     while True:
         if month not in month_titles:
             month = input('Sorry, there was an error in your input. Please choose one of the following - January, February, March, April, May, June or all.\n').lower()
             continue
-        else:  
+        else:
             break
     print('Thank you for choosing this month:\n' + month.title())
-    
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
 
     day = input('For what day would you like to see the data? You can choose either all or a day from Monday to Sunday. \n').lower()
@@ -53,7 +53,7 @@ def get_filters():
         else:
             break
     print('Thank you that you chose this day:\n' + day.title())
-                     
+
     print('-'*40)
     return city, month, day
 
@@ -66,33 +66,33 @@ def load_data(city, month, day):
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day"""
-    
+
     #load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     #convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-                                      
+
     #extract month,weekday and start hour from the Start Time column to create new columns
     df['month'] = df['Start Time'].dt.month
     df['weekday'] = df['Start Time'].dt.weekday_name
     df['hour'] = df['Start Time'].dt.hour
-        
-                                      
+
+
     #filter by month if applicable
     if month != 'all':
         months = ['january','february','march','april','may','june']
         month = months.index(month)+ 1
-      
+
     #filter by month to create the new dataframe
         df = df[df['month'] == month]
 
     #filter by day if applicable
     if day != 'all':
-        
+
     #filter by day of week to create the new dataframe
         df = df[df['weekday'] == day.title()]
-        
+
     return df
 
 def time_stats(df):
@@ -113,7 +113,7 @@ def time_stats(df):
     common_start_hour = df['hour'].mode()[0]
     print('The most common starting hour is: {}.'.format(common_start_hour))
 
-    
+
     print('\nThis took %s seconds.' % (time.time() - start_time))
     print('-'*40)
 
@@ -137,7 +137,7 @@ def station_stats(df):
     most_frequent_combination = df['Common Combination'].value_counts().idxmax()
     print('\nThe most commonly used combination of start and end station is: {}.'.format(most_frequent_combination))
 
-    
+
     print('\nThis took %s seconds.' % (time.time() - start_time))
     print('-'*40)
 
@@ -183,13 +183,13 @@ def user_stats(df):
 
     except KeyError:
      print('There is no gender and birth year data available for Washington.')
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def data_input(df):
     """Asks users for raw data."""
-    
+
     print('\nAsking for raw data...\n')
     raw_data = 0
     while True:
@@ -201,8 +201,8 @@ def data_input(df):
             raw_data += 5
         elif userinput == 'no':
                 return
-            
-    
+
+
 def main():
     while True:
         city, month, day = get_filters()
